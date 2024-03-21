@@ -1,0 +1,17 @@
+.DS_Store
+Thumbs.db
+.idea/
+*.swp
+/vendor/
+/node_modules/
+/prestashop/var/cache/
+/prestashop/var/logs/
+/prestashop/img/upload/
+/prestashop/themes/*/cache/
+/prestashop/themes/*/cache_smarty/
+/prestashop/translations/LOCALIZATION.md
+/prestashop/translations/*/index.php
+/prestashop/translations/*/translations_data.json
+/prestashop/modules/custom/
+/prestashop/themes/custom/
+/prestashop/install/

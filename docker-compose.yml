@@ -1,0 +1,49 @@
+version: '3'
+services:
+  mysql:
+    build: 
+      context: .
+      dockerfile: ./mysql/Dockerfile
+    container_name: ${MYSQL_CONTAINER_NAME}
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+    networks:
+      - prestashop_network
+  prestashop:
+    build:
+      context: .
+      dockerfile: ./prestashop/Dockerfile
+    container_name: ${PRESTASHOP_CONTAINER_NAME}
+    restart: unless-stopped
+    depends_on:
+      - mysql
+    ports:
+      - ${PS_PORT}:80
+    environment:
+      DB_SERVER: ${DB_SERVER}
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASSWD: ${DB_PASSWD}
+      PS_FOLDER_ADMIN: ${PS_FOLDER_ADMIN}
+      PS_FOLDER_INSTALL: ${PS_FOLDER_INSTALL}
+    volumes:
+      - ./prestashop:/var/www/html
+    networks:
+      - prestashop_network
+    
+  # phpmyadmin:
+  #   image: phpmyadmin/phpmyadmin
+  #   container_name: phpmyadmin
+  #   ports:
+  #     - '8081:80'
+  #   environment:
+  #     PMA_HOST: mysql
+  #     MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+  #   networks:
+  #     - prestashop_network
+
+networks:
+  prestashop_network:
+    driver: bridge

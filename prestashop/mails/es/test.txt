@@ -1,0 +1,13 @@
+ 
+
+{shop_url}
+
+Hola {firstname} {lastname},
+
+Esta es una prueba de email de su tienda.
+
+Si puede leer esto, significa que ¡la prueba fue completada correctamente!
+
+[{shop_name}]({shop_url})
+
+Powered by [PrestaShop](https://www.prestashop-project.org/)
